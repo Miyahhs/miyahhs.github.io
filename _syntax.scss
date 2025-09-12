@@ -1,0 +1,7 @@
+/* Simple pink-leaning syntax highlighting */
+.highlight, pre.highlight {
+  background: color-mix(in srgb, var(--pink-50) 30%, var(--surface));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+code.highlighter-rouge { background: color-mix(in srgb, var(--pink-50) 40%, transparent); padding: 2px 6px; border-radius: 6px; }

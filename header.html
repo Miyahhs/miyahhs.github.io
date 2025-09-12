@@ -1,0 +1,20 @@
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <span class="brand-mark">✿</span>
+      <span class="brand-text">{{ site.title }}</span>
+    </a>
+    <nav class="menu">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <a href="{{ '/about/' | relative_url }}">About</a>
+      <a href="{{ '/blog/' | relative_url }}">Blog</a>
+      {% if site.theme_settings.show_nav_social %}
+      <span class="menu-gap"></span>
+      {% if site.author.github %}<a href="https://github.com/{{ site.author.github }}" aria-label="GitHub">GitHub</a>{% endif %}
+      {% if site.author.linkedin %}<a href="https://www.linkedin.com/in/{{ site.author.linkedin }}" aria-label="LinkedIn">LinkedIn</a>{% endif %}
+      {% if site.author.instagram %}<a href="https://instagram.com/{{ site.author.instagram }}" aria-label="Instagram">Instagram</a>{% endif %}
+      {% if site.author.twitter %}<a href="https://twitter.com/{{ site.author.twitter }}" aria-label="Twitter">Twitter</a>{% endif %}
+      {% endif %}
+    </nav>
+  </div>
+</header>
