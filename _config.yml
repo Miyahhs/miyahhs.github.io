@@ -24,6 +24,7 @@ plugins:
 collections:
   posts:
     output: true
+  theme: null
 
 # Theme settings (used by includes/layouts)
 theme_settings:
