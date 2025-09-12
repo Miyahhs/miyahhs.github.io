@@ -1,0 +1,41 @@
+title: Pink Profesh
+description: A clean, cute, professional Jekyll theme.
+url: "" # e.g., https://yourname.github.io
+baseurl: "" # if you use a project site, set like "/project"
+author:
+  name: Your Name
+  email: you@example.com
+  # social handles used by SEO tag
+  twitter: ""
+  instagram: ""
+  github: ""
+  linkedin: ""
+
+permalink: /:categories/:title/
+paginate: 5
+paginate_path: "/page:num/"
+markdown: kramdown
+
+plugins:
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+collections:
+  posts:
+    output: true
+
+# Theme settings (used by includes/layouts)
+theme_settings:
+  show_nav_social: true
+  show_post_dates: true
+  accent: "pink"
+
+# Build
+exclude:
+  - node_modules
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
+  - .gitignore
