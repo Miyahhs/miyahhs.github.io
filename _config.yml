@@ -1,14 +1,14 @@
-title: Pink Profesh
-description: A clean, cute, professional Jekyll theme.
+title: Amiyah Stephens Portfolio
+description: A collection of my projects and accomplishments.
 url: "https://miyahhs.github.io" # e.g., https://yourname.github.io
 baseurl: "" # if you use a project site, set like "/project"
 author:
-  name: Amiyah
+  name: Amiyah Stephens
   email: miyahs121@gmail.com
   # social handles used by SEO tag
   twitter: ""
-  instagram: ""
-  github: ""
+  instagram: "miyahts"
+  github: "miyahhs"
   linkedin: ""
 
 permalink: /:categories/:title/
