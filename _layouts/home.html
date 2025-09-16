@@ -1,37 +1,84 @@
 ---
 layout: default
 ---
+<!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <h1>{{ site.title }}</h1>
-    <p class="lead">{{ site.description }}</p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="{{ '/about/' | relative_url }}">About</a>
-      <a class="btn btn-outline" href="{{ '/blog/' | relative_url }}">Blog</a>
+    <h1>{{ page.hero_title | default: site.title }}</h1>
+    <p class="lead">{{ page.hero_subtitle | default: site.description }}</p>
+    <div class="hero-cta" style="margin-top:16px;">
+      {% if page.cta_primary.href %}
+        <a class="btn btn-primary" href="{{ page.cta_primary.href }}">{{ page.cta_primary.text }}</a>
+      {% endif %}
+      {% if page.cta_secondary.href %}
+        <a class="btn btn-outline" href="{{ page.cta_secondary.href }}">{{ page.cta_secondary.text }}</a>
+      {% endif %}
     </div>
   </div>
 </section>
 
-<section class="posts">
+<!-- QUICK BIO -->
+<section class="container" style="margin-top: var(--space-5);">
+  <div class="card" style="display:grid; gap:8px;">
+    <div><strong>{{ page.bio_heading | default: "What I do" }}</strong></div>
+    <div>{{ page.bio_blurb | default: "I build reliable systems where hardware meets software — embedded, digital design/FPGA, and security-minded software." }}</div>
+    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:6px;">
+      {% for tag in page.bio_tags %}
+        <span class="badge">{{ tag }}</span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROJECTS -->
+{% if page.featured and page.featured.size > 0 %}
+<section class="container" style="margin-top: var(--space-5);">
+  <h2>Featured projects</h2>
+  <div class="pp-grid">
+    {% for proj in page.featured %}
+    <article class="post-card">
+      {% if proj.img %}
+        <img src="{{ proj.img | relative_url }}" alt="{{ proj.title | escape }}" style="width:100%; border-radius:12px;">
+      {% endif %}
+      <a href="{{ proj.link | relative_url }}" class="post-card-title" style="margin-top:6px; display:inline-block;">{{ proj.title }}</a>
+      <p class="post-card-excerpt" style="grid-column: 1 / -1;">{{ proj.desc }}</p>
+      <div style="grid-column: 1 / -1;">
+        {% for t in proj.tags %}
+          <span class="badge">{{ t }}</span>
+        {% endfor %}
+      </div>
+      <div class="pager" style="justify-content:flex-start;">
+        {% if proj.github %}
+          <a class="btn btn-outline" href="{{ proj.github }}" target="_blank" rel="noopener">GitHub</a>
+        {% endif %}
+        {% if proj.demo %}
+          <a class="btn btn-outline" href="{{ proj.demo }}" target="_blank" rel="noopener">Demo</a>
+        {% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  <div class="pager">
+    <a class="btn btn-primary" href="{{ '/projects/' | relative_url }}">See all projects</a>
+  </div>
+</section>
+{% endif %}
+
+<!-- LATEST POSTS -->
+{% if site.posts and site.posts.size > 0 %}
+<section class="container" style="margin-top: var(--space-5);">
   <h2>Latest posts</h2>
   <ul class="post-list">
-    {% for post in paginator.posts %}
+    {% for post in site.posts limit:3 %}
       <li class="post-card">
-        <a href="{{ post.url | relative_url }}" class="post-card-title">{{ post.title }}</a>
-        {% if site.theme_settings.show_post_dates %}
-          <span class="post-card-date">{{ post.date | date: "%b %d, %Y" }}</span>
-        {% endif %}
-        <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+        <a class="post-card-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <span class="post-card-date">{{ post.date | date: "%b %d, %Y" }}</span>
+        <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncate: 140 }}</p>
       </li>
     {% endfor %}
   </ul>
-
   <div class="pager">
-    {% if paginator.previous_page %}
-      <a class="btn btn-outline" href="{{ paginator.previous_page_path | relative_url }}">← Newer</a>
-    {% endif %}
-    {% if paginator.next_page %}
-      <a class="btn btn-outline" href="{{ paginator.next_page_path | relative_url }}">Older →</a>
-    {% endif %}
+    <a class="btn btn-outline" href="{{ '/blog/' | relative_url }}">View all posts</a>
   </div>
 </section>
+{% endif %}
